@@ -1,11 +1,15 @@
 ## Guia: Adicionar e Configurar Disco de Armazenamento para Pacotes no SUSE Manager (VirtualBox)
 
-Este guia detalha o processo de adicionar um novo disco de 100GB a uma máquina virtual (VM) existente do SUSE Manager 5.0.4 em SLES Micro no VirtualBox, configurando-o para armazenar os pacotes e canais de software do SUSE Manager.
+Este guia detalha o processo de adicionar um novo disco de 100GB a uma máquina virtual (VM) existente do SUSE Manager 5.0.4.1 em SLES Micro 5.5, executando no VirtualBox 7.1.10. O objetivo é configurar este novo disco para que ele seja o local de armazenamento principal para os pacotes e canais de software do SUSE Manager, que é implantado de forma contêinerizada via Podman.
 
-**Contexto:**
-* **Host:** Windows 11 com VirtualBox
-* **Guest (VM):** SLES Micro 5.x com SUSE Manager 5.0.4 (contêinerizado via Podman)
-* **Novo Disco:** 100 GB
+**Cenário Detalhado:**
+Você possui uma VM no VirtualBox (versão 7.1.10) em um host Windows 11. Nesta VM, está instalado o SLES Micro 5.5, que é um sistema operacional leve e imutável, otimizado para cargas de trabalho de contêineres. Sobre o SLES Micro, o SUSE Manager 5.0.4.1 está instalado e funcional em um ambiente contêinerizado (gerenciado pelo Podman). Atualmente, a VM possui apenas um disco de 20GB, e você precisa expandir o armazenamento para acomodar os produtos e canais de software do SUSE Manager, que ainda não foram adicionados. O novo disco de 100GB será configurado para ser montado no local onde o SUSE Manager espera armazenar esses pacotes.
+
+**Versões Utilizadas:**
+* **Host:** Windows 11
+* **VirtualBox:** 7.1.10
+* **Guest OS (VM):** SLES Micro 5.5
+* **SUSE Manager:** 5.0.4.1 (contêinerizado)
 
 ---
 
@@ -129,3 +133,9 @@ Este guia detalha o processo de adicionar um novo disco de 100GB a uma máquina 
 **Conclusão:**
 
 O SUSE Manager agora está configurado para utilizar o novo disco de 100GB montado em `/var/lib/containers/storage/volumes/srv-spacewalk/_data` para armazenar seus canais e pacotes de software. Você pode prosseguir com a adição de produtos e canais através da interface web do SUSE Manager.
+
+**Conclusão:**
+
+O SUSE Manager agora está configurado para utilizar o novo disco de 100GB montado em `/var/lib/containers/storage/volumes/srv-spacewalk/_data` para armazenar seus canais e pacotes de software. Você pode prosseguir com a adição de produtos e canais através da interface web do SUSE Manager.
+
+---
