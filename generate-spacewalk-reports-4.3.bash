@@ -51,7 +51,7 @@ mkdir -p "$report_dir" || {
 # Each report is saved as a CSV file named after the report
 #
 for report_name in $(spacewalk-report); do
-  spacewalk-report "$report_name" >> "${report_dir}/${report_name}.csv"
+  spacewalk-report "$report_name" >> "${report_dir}/${report_name}.csv" 2>/dev/null
 done
 
 # === Compress the report directory ===
