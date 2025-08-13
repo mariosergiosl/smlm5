@@ -76,6 +76,7 @@ rm -rf "$report_dir" || {
 }
 
 # === Final status message ===
-echo "✅ Reports generated and archived at: $archive_path"
-echo "📦 To copy the archive to the host, run the following command on suma5:"
+echo "Reports generated and archived at: $archive_path"
+echo "exit # To exit the container shell"
+echo "To copy the archive to the host, run the following command on SUSE Manager host:"
 echo "mgrctl cp server:$archive_path $archive_path"
