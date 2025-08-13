@@ -1,15 +1,42 @@
 #!/bin/bash
 #
-# FILE: generate-spacewalk-reports-5.0.5.sh
+# FILE: generate-spacewalk-reports-5.0.5.bash
 #
-# USAGE: generate-spacewalk-reports-5.0.5.sh
+# USAGE:
+#   1. On the SUSE Manager 5.0.5 host (where Podman is running):
+#        - Access the Uyuni Server container:
+#            mgrctl term
+#        - Create this script inside the container using your preferred editor:
+#            vim /opt/generate-spacewalk-reports-5.0.5.bash
+#          or download it from GitHub:
+#            https://github.com/mariosergiosl/smlm5/blob/main/generate-spacewalk-reports-5.0.5.bash
+#        - Make it executable:
+#            chmod +x /opt/generate-spacewalk-reports-5.0.5.bash
+#
+#   2. Inside the Uyuni Server container:
+#        /opt/generate-spacewalk-reports-5.0.5.bash
+#      → Generates all available Spacewalk reports
+#      → Stores them as CSV files in a timestamped folder under /opt
+#      → Compresses the folder into a .tar.gz archive
+#      → Deletes the original folder to save space
+#      → Prints the command to copy the archive to the host
+#        exit - to return to the host system 
+#
+#   3. On the host system (suma5):
+#        Run the printed command to copy the archive from the container:
+#            mgrctl cp server:/opt/reports_<timestamp>.tar.gz /opt/reports_<timestamp>.tar.gz
 #
 # DESCRIPTION:
-#   Generates all available Spacewalk reports, stores them as CSV files
-#   in a timestamped directory, compresses the directory, and removes the original.
+#   This script automates the generation and packaging of Spacewalk reports
+#   inside the Uyuni Server container. It creates a timestamped directory,
+#   saves each report as a CSV file, compresses the directory into a .tar.gz archive,
+#   and removes the original folder to conserve disk space.
+#
+#   After execution, the archive can be copied to the host using `mgrctl cp`
+#   with the `server:` prefix to access the container's filesystem.
 #
 # OPTIONS: None
-# REQUIREMENTS: spacewalk-report command must be available
+# REQUIREMENTS: spacewalk-report command must be available inside the Uyuni Server container
 # AUTHOR: Mario Luz, mario.luz[at]suse.com
 # VERSION: 1.0
 # CREATED: 2025-08-13
@@ -50,3 +77,5 @@ rm -rf "$report_dir" || {
 
 # === Final status message ===
 echo "✅ Reports generated and archived at: $archive_path"
+echo "📦 To copy the archive to the host, run the following command on suma5:"
+echo "mgrctl cp server:$archive_path $archive_path"
