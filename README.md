@@ -26,6 +26,13 @@ Este repositório reúne scripts em Bash e Python para integração, automação
 - **list_all_users_by_api.py**  
   Conecta à API XML-RPC do SUSE Manager e lista todos os usuários cadastrados, mostrando login, nome completo, e-mail e status da conta (ativa ou desativada). Útil para auditoria e administração de usuários.
 
+- **get_user_details_by_api.py**  
+  Conecta à API XML-RPC do SUSE Manager para buscar e exibir os detalhes de um usuário específico. Mostra login, nome completo, e-mail, status da conta (ativa ou desativada) e os papéis administrativos atribuídos.  
+  **Uso:**  
+  ```bash
+  python3 get_user_details_by_api.py <username>
+  ```
+
 ## Requisitos
 
 - Bash, curl, xmlstarlet (para scripts Bash)
@@ -73,10 +80,16 @@ python3 list_system_by_api.py
 python3 list_all_users_by_api.py
 ```
 
+#### Detalhes de um usuário específico
+
+```bash
+python3 get_user_details_by_api.py <username>
+```
+
 ## Como contribuir
 
 Consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licença
 
-Distribuído sob a licença GNU AGPL v3. Veja [LICENSE](LICENSE) para mais detalhes.
+Distribuído sob a licença GNU AGPL v3. Veja [LICENSE](LICENSE) para mais
