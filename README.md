@@ -1,23 +1,30 @@
 # SMLM5 - Scripts para SUSE Manager
 
-Este repositório contém scripts em Bash e Python para integração com a API do SUSE Manager, facilitando o inventário, automação de tarefas administrativas e geração de relatórios.
+Este repositório reúne scripts em Bash e Python para integração, automação e geração de relatórios no SUSE Manager, facilitando inventário de sistemas, administração de usuários e exportação de dados.
 
-## Scripts principais
+## Scripts disponíveis
+
+### Bash
 
 - **list_system_full_by_api.bash**  
-  Lista sistemas registrados no SUSE Manager, exibindo nome, ID e IP real.
-
-- **list_system_by_api.py**  
-  Lista sistemas registrados, mostrando nome, ID, release e IP.
+  Lista todos os sistemas registrados no SUSE Manager, exibindo nome, ID e IP real. Útil para inventário rápido e conferência de ativos.
 
 - **update_git.bash**  
-  Automatiza commit, pull e push no repositório Git, garantindo que os testes Python passem antes de atualizar o repositório.
+  Automatiza operações Git: realiza commit, pull e push no repositório, garantindo que os testes Python sejam executados e aprovados antes de atualizar o repositório remoto.
 
 - **generate-spacewalk-reports-4.3.bash**  
-  Gera todos os relatórios disponíveis do Spacewalk no SUSE Manager 4.3, salva como CSV em uma pasta com timestamp, compacta em `.tar.gz` e remove a pasta original.
+  Gera todos os relatórios disponíveis do Spacewalk no SUSE Manager 4.3, salvando-os em formato CSV em uma pasta com timestamp. Após a geração, compacta os arquivos em `.tar.gz` e remove a pasta original para otimizar espaço.
 
 - **generate-spacewalk-reports-5.0.5.bash**  
-  Executa dentro do container Uyuni Server no SUSE Manager 5.0.5, gera relatórios Spacewalk, salva como CSV, compacta em `.tar.gz`, remove a pasta original e orienta como copiar o arquivo para o host usando `mgrctl cp`.
+  Executa dentro do container Uyuni Server no SUSE Manager 5.0.5. Gera relatórios Spacewalk em CSV, compacta em `.tar.gz`, remove a pasta original e orienta como copiar o arquivo para o host usando `mgrctl cp`.
+
+### Python
+
+- **list_system_by_api.py**  
+  Conecta à API XML-RPC do SUSE Manager e lista todos os sistemas registrados, exibindo nome, ID, release e IP em formato de tabela. Permite inventário detalhado e exportação de dados para outros sistemas.
+
+- **list_all_users_by_api.py**  
+  Conecta à API XML-RPC do SUSE Manager e lista todos os usuários cadastrados, mostrando login, nome completo, e-mail e status da conta (ativa ou desativada). Útil para auditoria e administração de usuários.
 
 ## Requisitos
 
@@ -29,7 +36,7 @@ Este repositório contém scripts em Bash e Python para integração com a API d
 
 ## Uso
 
-Veja instruções detalhadas no início de cada script.
+Consulte instruções detalhadas no início de cada script.
 
 ### Relatórios Spacewalk
 
@@ -50,6 +57,20 @@ chmod +x /opt/generate-spacewalk-reports-5.0.5.bash
 /opt/generate-spacewalk-reports-5.0.5.bash
 exit
 mgrctl cp server:/opt/reports_<timestamp>.tar.gz /opt/reports_<timestamp>.tar.gz
+```
+
+### Inventário de sistemas e usuários
+
+#### Listar sistemas
+
+```bash
+python3 list_system_by_api.py
+```
+
+#### Listar usuários
+
+```bash
+python3 list_all_users_by_api.py
 ```
 
 ## Como contribuir
